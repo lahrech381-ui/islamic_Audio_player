@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>المكتبة الإسلامية الصوتية | البحث والاستماع إلى التلاوات والمحاضرات</title>
+  <meta name="description" content="منصة البحث والاستماع إلى التلاوات القرآنية والمحاضرات الإسلامية والدروس والخطب بصيغة MP3 من أرشيف الإنترنت">
+  <meta name="keywords" content="قرآن, تلاوة, محاضرات إسلامية, دروس, خطب, MP3, الاستماع, تحميل">
+  <meta property="og:title" content="المكتبة الإسلامية الصوتية">
+  <meta property="og:description" content="منصة البحث والاستماع إلى التلاوات القرآنية والمحاضرات الإسلامية">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ar_AR">
+  <meta name="robots" content="index, follow">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="islamic-pattern"></div>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+      <span class="logo-icon"><i class="fas fa-mosque"></i></span>
+      المكتبة الإسلامية
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span><i class="fas fa-bars" style="color: var(--gold); font-size: 1.3rem;"></i></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item"><a class="nav-link active" href="#" data-page="home"><i class="fas fa-home ms-1"></i>الرئيسية</a></li>
+        <li class="nav-item"><a class="nav-link" href="#" data-page="favorites"><i class="fas fa-heart ms-1"></i>المفضلة</a></li>
+        <li class="nav-item"><a class="nav-link" href="#" data-page="keywords"><i class="fas fa-tags ms-1"></i>الكلمات المفتاحية</a></li>
+        <li class="nav-item"><a class="nav-link" href="#" data-page="manual"><i class="fas fa-book ms-1"></i>الدليل</a></li>
+        <li class="nav-item"><a class="nav-link" href="#" data-page="about"><i class="fas fa-info-circle ms-1"></i>حول</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" title="تغيير المظهر">
+        <i class="fas fa-moon"></i>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="homePage">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <i class="fas fa-mosque"></i>
+      <span>المكتبة الإسلامية الصوتية</span>
+    </div>
+    <h1 class="hero-title">
+      ابحث عن <span class="gold-text">التلاوات</span> و
+      <span class="emerald-text">المحاضرات الإسلامية</span>
+    </h1>
+    <p class="hero-subtitle">
+      المنصة المتخصصة للبحث والاستماع إلى آلاف التسجيلات الصوتية الإسلامية
+      <br>من مجموعات أرشيف الإنترنت العامة
+    </p>
+  </div>
+  <svg class="islamic-arch" viewBox="0 0 1440 120" preserveAspectRatio="none">
+    <path d="M0,120 C360,0 1080,0 1440,120 L1440,120 L0,120 Z" fill="var(--dark-bg)"></path>
+  </svg>
+</section>
+
+<!-- ===== SEARCH SECTION ===== -->
+<section class="search-section">
+  <div class="search-container">
+    <div class="search-box">
+      <i class="fas fa-search" style="color: var(--text-muted); padding-right: 12px;"></i>
+      <input type="text" id="searchInput" placeholder="ابحث عن تلاوة، محاضرة، شيخ، أو موضوع..." autocomplete="off">
+      <button class="reset-btn" id="resetSearch" title="إعادة تعيين">
+        <i class="fas fa-times"></i>
+      </button>
+      <button id="searchBtn"><i class="fas fa-search"></i> بحث</button>
+    </div>
+
+    <div class="advanced-search-toggle">
+      <button id="advancedToggle"><i class="fas fa-sliders-h"></i> البحث المتقدم</button>
+    </div>
+
+    <div class="advanced-search-panel" id="advancedPanel">
+      <div class="advanced-search-box">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label" style="color: var(--text-secondary); font-weight: 600;">اختر الشيخ</label>
+            <select class="advanced-select" id="sheikhSelect">
+              <option value="">-- اختر الشيخ --</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label" style="color: var(--text-secondary); font-weight: 600;">اختر التصنيف</label>
+            <select class="advanced-select" id="categorySelect">
+              <option value="">-- اختر التصنيف --</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="text-center mt-3">
+          <button class="btn" id="advancedSearchBtn" style="background: linear-gradient(135deg, var(--gold), #b8962c); color: #fff; font-family: var(--font-cairo); font-weight: 600; padding: 8px 32px; border: none; border-radius: 10px;">
+            <i class="fas fa-search"></i> بحث متقدم
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="error-msg" id="errorMsg">
+      <i class="fas fa-exclamation-circle"></i>
+      <span id="errorText"></span>
+    </div>
+  </div>
+  <div class="marquee-container" style="text-align: center;">
+    <p class="marquee-text">
+    يمكنك استخدام البحث المتقدم لتحديد نتائج أكثر دقة.
+    <i class="fas fa-sliders-h"></i>
+</p>
+  </div>
+</section>
+
+<!-- ===== RESULTS SECTION ===== -->
+<section class="results-section" id="resultsSection">
+  <div class="container">
+    <div class="section-header">
+      <h2><i class="fas fa-list ms-2" style="color: var(--emerald);"></i> نتائج البحث</h2>
+      <p id="resultsInfo">ابدأ البحث لاكتشاف المحتوى الإسلامي</p>
+      <div class="result-count" id="resultCount" style="display: none;">
+        <i class="fas fa-headphones"></i> <span id="countNum">0</span> نتيجة
+      </div>
+    </div>
+
+    <div class="row g-4" id="resultsContainer">
+      <!-- Results rendered by JS -->
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination-wrapper" id="paginationWrapper" style="display: none;">
+      <nav>
+        <ul class="pagination-custom" id="pagination">
+        </ul>
+      </nav>
+    </div>
+  </div>
+</section>
+
+<!-- ===== KEYWORDS ADMIN PAGE ===== -->
+<section class="page-section" id="keywordsPage" style="display: none;">
+  <div class="container">
+    <div class="section-header">
+      <h2><i class="fas fa-tags ms-2" style="color: var(--gold);"></i> إدارة الكلمات المفتاحية</h2>
+      <p>أضف، عدل، أو احذف الكلمات المفتاحية والمشايخ والتصنيفات</p>
+    </div>
+
+    <div class="row mb-4">
+      <div class="col-md-4 mb-3">
+        <div class="page-card" style="height: 100%;">
+          <h3><i class="fas fa-plus-circle" style="color: var(--emerald);"></i> إضافة جديدة</h3>
+          <div class="mb-3">
+            <label class="form-label" style="color: var(--text-secondary);">النوع</label>
+            <select class="advanced-select" id="adminType">
+              <option value="keyword">كلمة مفتاحية</option>
+              <option value="sheikh">شيخ</option>
+              <option value="category">تصنيف</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" style="color: var(--text-secondary);">القيمة</label>
+            <input type="text" class="advanced-select" id="adminValue" placeholder="أدخل القيمة..." style="width: 100%;">
+          </div>
+          <button class="btn" id="adminAddBtn" style="background: var(--emerald); color: #fff; font-family: var(--font-cairo); font-weight: 600; width: 100%; border: none; border-radius: 10px; padding: 10px;">
+            <i class="fas fa-plus"></i> إضافة
+          </button>
+        </div>
+      </div>
+      <div class="col-md-8 mb-3">
+        <div class="page-card" style="height: 100%;">
+          <h3><i class="fas fa-cog" style="color: var(--gold);"></i> الإجراءات</h3>
+          <div class="d-flex flex-wrap gap-2 mb-3">
+            <button class="btn" id="exportJsonBtn" style="background: var(--dark-surface); color: var(--gold); font-family: var(--font-cairo); border: 1px solid var(--dark-border); border-radius: 10px;">
+              <i class="fas fa-download"></i> تصدير JSON
+            </button>
+            <button class="btn" id="importJsonBtn" style="background: var(--dark-surface); color: var(--emerald); font-family: var(--font-cairo); border: 1px solid var(--dark-border); border-radius: 10px;">
+              <i class="fas fa-upload"></i> استيراد JSON
+            </button>
+            <button class="btn" id="resetDataBtn" style="background: rgba(239,68,68,0.1); color: #ef4444; font-family: var(--font-cairo); border: 1px solid rgba(239,68,68,0.3); border-radius: 10px;">
+              <i class="fas fa-trash"></i> إعادة تعيين
+            </button>
+          </div>
+          <input type="file" id="importFileInput" accept=".json" style="display: none;">
+          <div class="mb-3">
+            <input type="text" class="advanced-select" id="adminSearch" placeholder="بحث في الجدول..." style="width: 100%;">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-card">
+      <div class="nav-tabs-custom" id="adminTabs">
+        <button class="tab-link active" data-tab="tabKeywords">الكلمات المفتاحية</button>
+        <button class="tab-link" data-tab="tabSheikhs">المشايخ</button>
+        <button class="tab-link" data-tab="tabCategories">التصنيفات</button>
+      </div>
+      <div class="tab-content-custom">
+        <div class="tab-pane active" id="tabKeywords">
+          <div class="admin-table">
+            <table class="table">
+              <thead><tr><th>#</th><th>الكلمة</th><th>الإجراءات</th></tr></thead>
+              <tbody id="keywordsTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="tab-pane" id="tabSheikhs">
+          <div class="admin-table">
+            <table class="table">
+              <thead><tr><th>#</th><th>الشيخ</th><th>الإجراءات</th></tr></thead>
+              <tbody id="sheikhsTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="tab-pane" id="tabCategories">
+          <div class="admin-table">
+            <table class="table">
+              <thead><tr><th>#</th><th>التصنيف</th><th>الإجراءات</th></tr></thead>
+              <tbody id="categoriesTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAVORITES PAGE ===== -->
+<section class="page-section" id="favoritesPage" style="display: none;">
+  <div class="container">
+    <div class="section-header">
+      <h2><i class="fas fa-heart ms-2" style="color: var(--gold);"></i> المفضلة</h2>
+      <p>المقاطع الصوتية التي أضفتها إلى المفضلة</p>
+    </div>
+    <div class="row g-4" id="favoritesContainer">
+      <div class="col-12">
+        <div class="empty-state" id="favoritesEmpty">
+          <div class="empty-state-icon"><i class="far fa-heart"></i></div>
+          <h4>المفضلة فارغة</h4>
+          <p>أضف مقاطع إلى المفضلة بالضغط على أيقونة القلب أثناء الاستماع</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MANUAL PAGE ===== -->
+<section class="page-section" id="manualPage" style="display: none;">
+  <div class="container">
+    <div class="section-header">
+      <h2><i class="fas fa-book ms-2" style="color: var(--gold);"></i> دليل الاستخدام</h2>
+      <p>كل ما تحتاج معرفته لاستخدام المنصة</p>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <div class="page-card">
+          <h3><i class="fas fa-search" style="color: var(--emerald);"></i> كيفية البحث</h3>
+          <ul>
+            <li>استخدم مربع البحث الرئيسي لإدخال كلمة مفتاحية مثل اسم الشيخ أو عنوان المحاضرة</li>
+            <li>اضغط على زر "بحث" أو مفتاح Enter لبدء البحث</li>
+            <li>للبحث المتقدم، اضغط على "البحث المتقدم" واختر الشيخ أو التصنيف</li>
+            <li>ملاحظة: يمكنك استخدام قائمة واحدة فقط في البحث المتقدم (إما الشيخ أو التصنيف)</li>
+            <li>استخدم زر "إعادة تعيين" لمسح البحث والبدء من جديد</li>
+          </ul>
+        </div>
+
+        <div class="page-card">
+          <h3><i class="fas fa-headphones" style="color: var(--emerald);"></i> كيفية الاستماع</h3>
+          <ul>
+            <li>ابحث عن المحتوى الذي تريد الاستماع إليه</li>
+            <li>انقر على زر "استمع الآن" على بطاقة النتيجة</li>
+            <li>سيتم تشغيل الصوت في المشغل الثابت في أسفل الصفحة</li>
+            <li>يمكنك التحكم في الصوت من خلال أزرار التشغيل والإيقاف المؤقت والتقديم والتأخير</li>
+            <li>اضبط مستوى الصوت باستخدام شريط التحكم في الصوت</li>
+          </ul>
+        </div>
+
+        <div class="page-card">
+          <h3><i class="fas fa-heart" style="color: var(--emerald);"></i> كيفية إدارة المفضلة</h3>
+          <ul>
+            <li>انقر على أيقونة القلب بجانب أي مقطع صوتي لإضافته إلى المفضلة</li>
+            <li>يمكنك عرض جميع المقاطع المفضلة في قائمة المفضلة</li>
+            <li>انقر مرة أخرى على القلب لإزالة المقطع من المفضلة</li>
+            <li>يتم حفظ المفضلة في متصفحك ولا تحتاج إلى تسجيل حساب</li>
+          </ul>
+        </div>
+
+        <div class="page-card">
+          <h3><i class="fas fa-list" style="color: var(--emerald);"></i> قوائم التشغيل</h3>
+          <ul>
+            <li>عند النقر على "قائمة التشغيل" في بطاقة النتيجة، تظهر نافذة تحتوي على جميع المقاطع الصوتية</li>
+            <li>يمكنك تشغيل أي مقطع من القائمة بالنقر عليه</li>
+            <li>استخدم شريط البحث داخل قائمة التشغيل للتصفية</li>
+            <li>يمكنك تحميل أو مشاركة أي مقطع من قائمة التشغيل</li>
+          </ul>
+        </div>
+
+        <div class="page-card">
+          <h3><i class="fas fa-question-circle" style="color: var(--gold);"></i> الأسئلة الشائعة (FAQ)</h3>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>هل المنصة مجانية بالكامل؟</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">نعم، المنصة مجانية بالكامل. جميع المحتويات متاحة للاستماع المباشر دون أي رسوم.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>هل يمكنني تحميل المقاطع الصوتية؟</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">نعم، يمكنك تحميل أي مقطع صوتي MP3 عبر زر التحميل الموجود في قائمة التشغيل أو في المشغل.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>من أين تأتي المحتويات؟</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">جميع المحتويات مأخوذة من المجموعات العامة في أرشيف الإنترنت (Archive.org) وهي متاحة للجميع.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>هل أحتاج إلى تسجيل حساب؟</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">لا، المنصة لا تتطلب أي تسجيل. يمكنك الاستماع وإنشاء قوائم المفضلة دون حساب.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>كيف يتم حفظ المفضلة؟</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">يتم حفظ المفضلة في متصفحك المحلي (LocalStorage)، لذا فهي مرتبطة بجهازك الحالي.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT PAGE ===== -->
+<section class="page-section" id="aboutPage" style="display: none;">
+  <div class="container">
+    <div class="section-header">
+      <h2><i class="fas fa-info-circle ms-2" style="color: var(--gold);"></i> حول المنصة</h2>
+      <p>المكتبة الإسلامية الصوتية</p>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <div class="page-card text-center">
+          <div style="font-size: 4rem; color: var(--gold); margin-bottom: 20px;">
+            <i class="fas fa-mosque"></i>
+          </div>
+          <h3 style="justify-content: center;">المكتبة الإسلامية الصوتية</h3>
+          <p style="font-size: 1.1rem; line-height: 2;">
+            منصة إسلامية متخصصة تهدف إلى تسهيل الوصول إلى آلاف التسجيلات الصوتية الإسلامية
+            المتاحة في المجموعات العامة على أرشيف الإنترنت. نسعى لتوفير تجربة استماع سلسة
+            وممتعة للمحتوى الإسلامي الأصيل من تلاوات قرآنية ومحاضرات ودروس وخطب.
+          </p>
+          <p style="text-align: center;color: #b8962c;">حسن لحرش</p>
+        </div>
+
+        <div class="page-card">
+          <h3><i class="fas fa-bullseye" style="color: var(--emerald);"></i> الهدف</h3>
+          <p>
+            تهدف هذه المنصة إلى جمع وتصنيف المحتوى الصوتي الإسلامي من مصادر موثوقة،
+            وتوفير محرك بحث متخصص يسهل على المستخدمين العثور على ما يبحثون عنه من
+            تلاوات قرآنية، محاضرات علمية، دروس شرعية، وخطب جمعة، وغيرها من المحتويات
+            الإسلامية النافعة.
+          </p>
+        </div>
+
+        <div class="page-card">
+          <h3><i class="fas fa-code" style="color: var(--emerald);"></i> التقنيات المستخدمة</h3>
+          <div class="row g-3">
+            <div class="col-6 col-md-3 text-center">
+              <div style="background: var(--dark-surface); padding: 16px; border-radius: var(--radius-sm);">
+                <i class="fab fa-html5" style="font-size: 2rem; color: #e44d26;"></i>
+                <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 6px;">HTML5</div>
+              </div>
+            </div>
+            <div class="col-6 col-md-3 text-center">
+              <div style="background: var(--dark-surface); padding: 16px; border-radius: var(--radius-sm);">
+                <i class="fab fa-css3-alt" style="font-size: 2rem; color: #1572b6;"></i>
+                <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 6px;">CSS3</div>
+              </div>
+            </div>
+            <div class="col-6 col-md-3 text-center">
+              <div style="background: var(--dark-surface); padding: 16px; border-radius: var(--radius-sm);">
+                <i class="fab fa-js" style="font-size: 2rem; color: #f7df1e;"></i>
+                <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 6px;">JavaScript</div>
+              </div>
+            </div>
+            <div class="col-6 col-md-3 text-center">
+              <div style="background: var(--dark-surface); padding: 16px; border-radius: var(--radius-sm);">
+                <i class="fab fa-bootstrap" style="font-size: 2rem; color: #7952b3;"></i>
+                <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 6px;">Bootstrap 5</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="page-card text-center">
+          <h3 style="justify-content: center;"><i class="fas fa-envelope" style="color: var(--gold);"></i> تواصل معنا</h3>
+          <p>للاستفسارات والاقتراحات، يرجى التواصل عبر البريد الإلكتروني</p>
+          <a href="mailto:lahrech381@gmail.com" style="color: var(--gold); text-decoration: none; font-weight: 600; font-size: 1.1rem;">
+            <i class="fas fa-envelope ms-1"></i> lahrech381@gmail.com
+          </a>
+          <p style="text-align: center;color: #b8962c;">حسن لحرش</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PLAYLIST MODAL ===== -->
+<div class="modal fade" id="playlistModal" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><i class="fas fa-list ms-2"></i> <span id="playlistModalTitle">قائمة التشغيل</span></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <input type="text" class="advanced-select" id="playlistSearch" placeholder="ابحث في قائمة التشغيل..." style="width: 100%;">
+        </div>
+        <div id="playlistTracks">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <span style="color: var(--text-muted); font-size: 0.85rem;" id="playlistTotalInfo">0 مقطع</span>
+        <button type="button" class="btn" style="background: var(--emerald); color: #fff; font-family: var(--font-cairo); font-weight: 600; border: none; border-radius: 10px;" data-bs-dismiss="modal">إغلاق</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FIXED AUDIO PLAYER ===== -->
+<div class="audio-player-fixed" id="audioPlayer">
+  <div class="player-inner">
+    <!-- Track Info -->
+    <div class="player-track-info">
+      <img class="player-track-img" id="playerTrackImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' fill='%231e293b'/%3E%3Ctext x='24' y='30' text-anchor='middle' fill='%23059669' font-size='20'%3E🎵%3C/text%3E%3C/svg%3E" alt="">
+      <div class="player-track-text">
+        <div class="track-name" id="playerTrackName">اختر مقطعاً للاستماع</div>
+        <div class="track-artist" id="playerTrackArtist">المكتبة الإسلامية</div>
+      </div>
+    </div>
+
+    <!-- Visualizer -->
+    <div class="visualizer" id="visualizer">
+      <div class="visualizer-bar" style="height: 3px;"></div>
+      <div class="visualizer-bar" style="height: 8px;"></div>
+      <div class="visualizer-bar" style="height: 5px;"></div>
+      <div class="visualizer-bar" style="height: 12px;"></div>
+      <div class="visualizer-bar" style="height: 7px;"></div>
+      <div class="visualizer-bar" style="height: 15px;"></div>
+      <div class="visualizer-bar" style="height: 9px;"></div>
+      <div class="visualizer-bar" style="height: 18px;"></div>
+      <div class="visualizer-bar" style="height: 6px;"></div>
+      <div class="visualizer-bar" style="height: 13px;"></div>
+      <div class="visualizer-bar" style="height: 4px;"></div>
+      <div class="visualizer-bar" style="height: 10px;"></div>
+    </div>
+
+    <!-- Controls -->
+    <div class="player-controls">
+      <button id="shuffleBtn" title="خلط"><i class="fas fa-random"></i></button>
+      <button id="prevBtn" title="السابق"><i class="fas fa-step-backward"></i></button>
+      <button class="play-main" id="playBtn" title="تشغيل / إيقاف">
+        <i class="fas fa-play" id="playIcon"></i>
+      </button>
+      <button id="nextBtn" title="التالي"><i class="fas fa-step-forward"></i></button>
+      <button id="repeatBtn" title="تكرار"><i class="fas fa-redo"></i></button>
+    </div>
+
+    <!-- Progress -->
+    <div class="player-progress">
+      <span class="current-time" id="currentTime">00:00</span>
+      <div class="progress-bar-track" id="progressTrack">
+        <div class="progress-bar-fill" id="progressFill"></div>
+      </div>
+      <span class="total-time" id="totalTime">00:00</span>
+    </div>
+
+    <!-- Volume -->
+    <div class="player-volume">
+      <button id="volumeBtn" title="كتم الصوت"><i class="fas fa-volume-up" id="volumeIcon"></i></button>
+      <div class="volume-slider" id="volumeSlider">
+        <div class="volume-fill" id="volumeFill"></div>
+      </div>
+    </div>
+
+    <!-- Extras -->
+    <div class="player-extras">
+      <button id="speedBtn" title="سرعة القراءة">1x</button>
+      <button id="favoriteBtn" title="المفضلة"><i class="far fa-heart"></i></button>
+      <button id="downloadBtn" title="تحميل"><i class="fas fa-download"></i></button>
+      <button id="shareBtn" title="مشاركة"><i class="fas fa-share-alt"></i></button>
+      <button id="minimizeBtn" title="تصغير"><i class="fas fa-chevron-down"></i></button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TOAST CONTAINER ===== -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="footer-brand"><i class="fas fa-mosque ms-2"></i>المكتبة الإسلامية الصوتية</div>
+        <p class="footer-text">
+          منصة متخصصة للبحث والاستماع إلى التلاوات القرآنية والمحاضرات الإسلامية
+          من مجموعات أرشيف الإنترنت العامة.
+        </p>
+      </div>
+      <div class="col-md-4">
+        <h5 style="color: var(--gold); font-weight: 700; margin-bottom: 16px;">روابط سريعة</h5>
+        <ul class="footer-links">
+          <li><a href="#" data-page="home"><i class="fas fa-home"></i> الرئيسية</a></li>
+          <li><a href="#" data-page="favorites"><i class="fas fa-heart"></i> المفضلة</a></li>
+          <li><a href="#" data-page="keywords"><i class="fas fa-tags"></i> الكلمات المفتاحية</a></li>
+          <li><a href="#" data-page="manual"><i class="fas fa-book"></i> دليل الاستخدام</a></li>
+          <li><a href="#" data-page="about"><i class="fas fa-info-circle"></i> حول المنصة</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <h5 style="color: var(--gold); font-weight: 700; margin-bottom: 16px;">إحصائيات</h5>
+        <p class="footer-text">
+          <i class="fas fa-headphones ms-1" style="color: var(--emerald);"></i> آلاف التسجيلات الصوتية<br>
+          <i class="fas fa-users ms-1" style="color: var(--emerald);"></i> العشرات من المشايخ<br>
+          <i class="fas fa-folder ms-1" style="color: var(--emerald);"></i> تصنيفات متعددة
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="d-flex flex-wrap justify-content-center align-items-center gap-4">
+        <span>&copy; 2026 المكتبة الإسلامية الصوتية. جميع الحقوق محفوظة.</span>
+        <span class="visit-counter" id="visitCounter">
+          <i class="fas fa-eye ms-1"></i>
+          <script type="text/javascript" src="https://compteur.websiteout.com/js/2/0/0/0"></script>
+        </span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== SCRIPTS ===== -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="api.js"></script>
+<script src="crawler.js"></script>
+<script src="player.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
