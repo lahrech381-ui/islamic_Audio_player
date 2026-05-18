@@ -1,6 +1,6 @@
 User-agent: *
 Allow: /
-Sitemap: https://islamic-audio.example.com/sitemap.xml
+Sitemap: https://lahrech381-ui.github.io/islamic_Audio_player/sitemap.xml
 
 # Disallow admin-only paths
 Disallow: /admin
